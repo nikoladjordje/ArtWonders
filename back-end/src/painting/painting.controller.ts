@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UploadedFile,
 } from '@nestjs/common';
 import { PaintingService } from './painting.service';
 import { PaintingDto } from './models/painting.dto';
@@ -23,8 +24,11 @@ export class PaintingController {
     return this.paintingService.getById(id);
   }
   @Post()
-  public addPainting(@Body() dto: PaintingDto) {
-    return this.paintingService.create(dto);
+  public addPainting(
+    @Body() dto: PaintingDto,
+    @UploadedFile() image: Express.Multer.File,
+  ) {
+    return this.paintingService.create(dto, image);
   }
   @Delete(':id')
   public deletePainting(@Param('id', ParseIntPipe) id: number) {

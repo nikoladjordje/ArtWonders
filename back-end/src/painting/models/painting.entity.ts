@@ -35,7 +35,7 @@ export class Painting {
   price: number;
 
   @Column()
-  image_url: string;
+  image: string;
 
   @Column()
   availability: boolean;
