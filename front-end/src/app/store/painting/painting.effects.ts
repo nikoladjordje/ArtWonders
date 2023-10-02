@@ -19,7 +19,7 @@ export class PaintingEffects {
     private snackBar: MatSnackBar
   ) {}
 
-  addBouquet$ = createEffect(() =>
+  addPainting$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PaintingActions.addPainting),
       mergeMap(({ painting }) =>

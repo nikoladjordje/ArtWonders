@@ -32,7 +32,19 @@
             <strong>Availability:</strong>
             {{ painting.availability ? "Available" : "Sold" }}
             <div *ngIf="painting.availability">
-              <button>Order</button>
+              <form (submit)="submitOrder(painting)">
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="date"
+                    placeholder="Select a date"
+                    [(ngModel)]="orderDate"
+                    name="orderDate"
+                    required
+                  />
+                </mat-form-field>
+                <button type="submit">Order</button>
+              </form>
             </div>
           </div>
         </div>
