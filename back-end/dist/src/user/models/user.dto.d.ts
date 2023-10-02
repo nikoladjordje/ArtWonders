@@ -1,5 +1,5 @@
+import { Role } from 'src/enums/role.enum';
 export declare class UserDto {
-    id: number;
     username: string;
     name: string;
     lastName: string;
@@ -16,5 +16,6 @@ export interface UserUpdateDto {
     lastName: string;
     email: string;
     phone: string;
+    role: Role;
     address: string;
 }

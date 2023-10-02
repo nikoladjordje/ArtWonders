@@ -3,8 +3,8 @@ import { User } from './models/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserDto, UserUpdateDto } from './models/user.dto';
-import * as bcrypt from 'bcryptjs';
 import { UPLOAD_DESTINATION } from 'config';
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
   constructor(

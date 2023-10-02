@@ -17,7 +17,15 @@ export class PaintingService {
   public getById(id: number) {
     return this.paintingRepository.findOneBy({ id: id });
   }
+  public async getByUserId(id: number) {
+    let paintings: Painting[] = await this.paintingRepository.find({
+      where: { owner: { id: id } },
+    });
+    return paintings;
+  }
   public async create(paintingDto: PaintingDto, img: Express.Multer.File) {
+    console.log('paintingdto service:' + paintingDto.availability);
+
     const painting = this.paintingRepository.create(paintingDto);
     if (img) {
       const { image } = painting;
@@ -29,6 +37,8 @@ export class PaintingService {
 
       painting.image = img.filename;
     }
+    console.log('painting service:' + painting.availability);
+
     return await this.paintingRepository.save(painting);
   }
   public async delete(id: number) {

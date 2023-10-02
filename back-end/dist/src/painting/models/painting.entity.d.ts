@@ -1,4 +1,3 @@
-import { Order } from 'src/order/models/order.entity';
 import { User } from 'src/user/models/user.entity';
 export declare class Painting {
     id: number;
@@ -9,8 +8,7 @@ export declare class Painting {
     medium: string;
     style: string;
     price: number;
-    image_url: string;
+    image: string;
     availability: boolean;
     owner: User;
-    order: Order;
 }

@@ -1,0 +1,39 @@
+<div class="paintings-container">
+  <div class="painting" *ngFor="let painting of paintings$ | async">
+    <mat-card class="painting-card">
+      <img
+        mat-card-image
+        [src]="this.imgPath + '/' + painting.image"
+        alt="{{ painting.title }}"
+        class="painting-image"
+      />
+      <mat-card-content style="background-color: #c2185b">
+        <h2 class="painting-title">{{ painting.title }}</h2>
+        <div class="painting-details">
+          <div class="painting-detail">
+            Artist <strong>{{ painting.artist }}</strong>
+          </div>
+          <div class="painting-detail">
+            <strong></strong> {{ painting.description }}
+          </div>
+          <div class="painting-detail">
+            <strong></strong> {{ painting.creation_date }}
+          </div>
+          <div class="painting-detail">
+            <strong> {{ painting.medium }}</strong>
+          </div>
+          <div class="painting-detail">
+            <strong>Style:</strong> {{ painting.style }}
+          </div>
+          <div class="painting-detail">
+            <strong>Price:</strong> ${{ painting.price }}
+          </div>
+          <div class="painting-detail">
+            <strong>Availability:</strong>
+            {{ painting.availability ? "Available" : "Sold" }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

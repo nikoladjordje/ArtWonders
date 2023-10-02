@@ -28,6 +28,7 @@ __decorate([
     (0, typeorm_1.OneToOne)(() => painting_entity_1.Painting, (order) => order, {
         onDelete: 'CASCADE',
     }),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", painting_entity_1.Painting)
 ], Order.prototype, "painting", void 0);
 __decorate([

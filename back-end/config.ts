@@ -9,7 +9,7 @@ export const JWT_SECRET = {
 export const JWT_EXPIRATION = {
   time: '1d',
 };
-
+export const ROOT_PATH = '/home/nikola/ArtWonders/back-end/uploads';
 export const UPLOAD_DESTINATION = './uploads';
 export const FILE_CONF = {
   storage: diskStorage({

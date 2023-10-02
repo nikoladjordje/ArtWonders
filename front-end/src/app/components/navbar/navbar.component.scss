@@ -1,0 +1,54 @@
+.login-div {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+.logged-text {
+  font-size: 17px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.title {
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.navbar {
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+  // background-color: rgba(236, 32, 32, 0.822);
+}
+
+.login-register {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-links {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.img-navbar {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.informations {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.shoppingCart {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}

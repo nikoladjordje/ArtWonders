@@ -3,6 +3,7 @@ import { User } from 'src/user/models/user.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -19,6 +20,7 @@ export class Order {
   @OneToOne(() => Painting, (order: Painting) => order, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn()
   painting: Painting;
 
   @ManyToOne(() => User, (owner: User) => owner.orders, { onDelete: 'CASCADE' })

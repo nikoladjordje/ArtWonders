@@ -17,7 +17,8 @@ const common_1 = require("@nestjs/common");
 const user_entity_1 = require("./models/user.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const bcrypt = require("bcryptjs");
+const config_1 = require("../../config");
+const bcrypt = require("bcrypt");
 let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -45,6 +46,36 @@ let UserService = class UserService {
     }
     async findUser(id) {
         return this.userRepository.findOne({ where: { id: id } });
+    }
+    async updateUser(user, picture) {
+        const pom = await this.userRepository.findOne({
+            where: { id: user.id },
+        });
+        if (!pom) {
+            throw new common_1.BadRequestException('InvalidUser');
+        }
+        pom.username = user.username;
+        pom.name = user.name;
+        pom.lastName = user.lastName;
+        pom.email = user.email;
+        pom.phone = user.phone;
+        pom.address = user.address;
+        pom.role = user.role;
+        if (picture) {
+            const { profilePicture } = pom;
+            const fs = require('fs');
+            if (profilePicture) {
+                fs.unlinkSync(`${config_1.UPLOAD_DESTINATION}/${profilePicture}`);
+            }
+            pom.profilePicture = picture.filename;
+        }
+        if (!(await this.userRepository.update(user.id, pom))) {
+            return { success: false };
+        }
+        return pom;
+    }
+    async deleteUser(id) {
+        return await this.userRepository.delete(id);
     }
 };
 exports.UserService = UserService;

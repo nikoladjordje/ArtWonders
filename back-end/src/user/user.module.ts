@@ -10,5 +10,6 @@ import { AuthService } from 'src/auth/auth.service';
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [UserService, AuthService, JwtService],
+  exports: [UserService],
 })
 export class UserModule {}

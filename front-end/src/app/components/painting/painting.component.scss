@@ -1,0 +1,31 @@
+.painting {
+  margin: 16px;
+  flex-basis: 25%;
+}
+
+.painting-card {
+  width: 300px;
+}
+
+.painting-image {
+  max-height: 200px;
+}
+
+.painting-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.painting-details {
+  margin-top: 10px;
+}
+
+.painting-detail {
+  margin-bottom: 5px;
+}
+
+.paintings-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

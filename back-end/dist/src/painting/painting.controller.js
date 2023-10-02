@@ -14,8 +14,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaintingController = void 0;
 const common_1 = require("@nestjs/common");
-const painting_service_1 = require("./painting.service");
 const painting_dto_1 = require("./models/painting.dto");
+const painting_service_1 = require("./painting.service");
+const platform_express_1 = require("@nestjs/platform-express");
+const config_1 = require("../../config");
 let PaintingController = class PaintingController {
     constructor(paintingService) {
         this.paintingService = paintingService;
@@ -24,10 +26,11 @@ let PaintingController = class PaintingController {
         return this.paintingService.getAll();
     }
     getPainting(id) {
-        return this.paintingService.getById(id);
+        return this.paintingService.getByUserId(id);
     }
-    addPainting(dto) {
-        return this.paintingService.create(dto);
+    addPainting(dto, image) {
+        console.log('painting controller:' + dto.availability);
+        return this.paintingService.create(dto, image);
     }
     deletePainting(id) {
         return this.paintingService.delete(id);
@@ -52,9 +55,11 @@ __decorate([
 ], PaintingController.prototype, "getPainting", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', config_1.FILE_CONF)),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [painting_dto_1.PaintingDto]),
+    __metadata("design:paramtypes", [painting_dto_1.PaintingDto, Object]),
     __metadata("design:returntype", void 0)
 ], PaintingController.prototype, "addPainting", null);
 __decorate([

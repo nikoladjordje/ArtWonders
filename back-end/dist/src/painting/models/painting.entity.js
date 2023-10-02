@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Painting = void 0;
-const order_entity_1 = require("../../order/models/order.entity");
 const user_entity_1 = require("../../user/models/user.entity");
 const typeorm_1 = require("typeorm");
 let Painting = class Painting {
@@ -51,21 +50,17 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Painting.prototype, "image_url", void 0);
+], Painting.prototype, "image", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Boolean)
 ], Painting.prototype, "availability", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => user_entity_1.User, (owner) => owner.postedPaintings, {
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (owner) => owner.postedPaintings, {
         onDelete: 'CASCADE',
     }),
     __metadata("design:type", user_entity_1.User)
 ], Painting.prototype, "owner", void 0);
-__decorate([
-    (0, typeorm_1.OneToOne)(() => order_entity_1.Order, (order) => order.painting),
-    __metadata("design:type", order_entity_1.Order)
-], Painting.prototype, "order", void 0);
 exports.Painting = Painting = __decorate([
     (0, typeorm_1.Entity)()
 ], Painting);

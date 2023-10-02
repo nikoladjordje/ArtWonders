@@ -9,9 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaintingModule = void 0;
 const common_1 = require("@nestjs/common");
 const painting_controller_1 = require("./painting.controller");
-const painting_service_1 = require("./painting.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const painting_entity_1 = require("./models/painting.entity");
+const painting_service_1 = require("./painting.service");
 let PaintingModule = class PaintingModule {
 };
 exports.PaintingModule = PaintingModule;

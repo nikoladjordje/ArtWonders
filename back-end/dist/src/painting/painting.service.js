@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const painting_entity_1 = require("./models/painting.entity");
 const typeorm_2 = require("typeorm");
+const config_1 = require("../../config");
 let PaintingService = class PaintingService {
     constructor(paintingRepository) {
         this.paintingRepository = paintingRepository;
@@ -27,8 +28,24 @@ let PaintingService = class PaintingService {
     getById(id) {
         return this.paintingRepository.findOneBy({ id: id });
     }
-    async create(paintingDto) {
+    async getByUserId(id) {
+        let paintings = await this.paintingRepository.find({
+            where: { owner: { id: id } },
+        });
+        return paintings;
+    }
+    async create(paintingDto, img) {
+        console.log('paintingdto service:' + paintingDto.availability);
         const painting = this.paintingRepository.create(paintingDto);
+        if (img) {
+            const { image } = painting;
+            const fs = require('fs');
+            if (image) {
+                fs.unlinkSync(`${config_1.UPLOAD_DESTINATION}/${image}`);
+            }
+            painting.image = img.filename;
+        }
+        console.log('painting service:' + painting.availability);
         return await this.paintingRepository.save(painting);
     }
     async delete(id) {

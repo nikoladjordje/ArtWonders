@@ -6,6 +6,7 @@ import {
   Column,
   OneToOne,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -40,11 +41,8 @@ export class Painting {
   @Column()
   availability: boolean;
 
-  @OneToMany(() => User, (owner: User) => owner.postedPaintings, {
+  @ManyToOne(() => User, (owner: User) => owner.postedPaintings, {
     onDelete: 'CASCADE',
   })
   owner: User;
-
-  @OneToOne(() => Order, (order: Order) => order.painting)
-  order: Order;
 }

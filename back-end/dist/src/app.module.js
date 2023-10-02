@@ -14,12 +14,26 @@ const painting_module_1 = require("./painting/painting.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_config_1 = require("../typeorm.config");
 const user_module_1 = require("./user/user.module");
+const order_module_1 = require("./order/order.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const config_1 = require("../config");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [painting_module_1.PaintingModule, typeorm_1.TypeOrmModule.forRoot(typeorm_config_1.typeOrmConfig), user_module_1.UserModule],
+        imports: [
+            painting_module_1.PaintingModule,
+            typeorm_1.TypeOrmModule.forRoot(typeorm_config_1.typeOrmConfig),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: config_1.ROOT_PATH,
+                renderPath: '/',
+            }),
+            user_module_1.UserModule,
+            order_module_1.OrderModule,
+            auth_module_1.AuthModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

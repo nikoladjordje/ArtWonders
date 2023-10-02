@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PaintingController } from './painting.controller';
-import { PaintingService } from './painting.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Painting } from './models/painting.entity';
+import { PaintingService } from './painting.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Painting])],

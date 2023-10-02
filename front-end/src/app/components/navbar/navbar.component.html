@@ -1,0 +1,41 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="title" (click)="navigate('home')">ArtWonders</span>
+  <div class="login-div">
+    <span class="logged-text" (click)="navigate('login')" *ngIf="!this.user"
+      >Login</span
+    >
+    <span class="logged-text"> <h1>/</h1> </span>
+    <span class="logged-text" (click)="navigate('register')" *ngIf="!this.user"
+      >Register</span
+    >
+  </div>
+  <div>
+    <div
+      class="informations"
+      *ngIf="this.user"
+      mat-button
+      [matMenuTriggerFor]="userMenu"
+    >
+      <img
+        class="img-navbar"
+        mat-card-avatar
+        [src]="
+          this.user.profilePicture
+            ? this.imgPath + '/' + this.user.profilePicture
+            : '../../../../../assets/common/defaultUser.png'
+        "
+      />
+      <span class="logged-text"> @{{ this.user.username }} </span>
+    </div>
+    <mat-menu #userMenu="matMenu" yPosition="above">
+      <button mat-menu-item (click)="navigate('edit-profile')">Account</button>
+      <button mat-menu-item (click)="navigate('add-painting')">
+        Add painting
+      </button>
+      <button mat-menu-item (click)="navigate('my-paintings')">
+        My paintings
+      </button>
+      <button mat-menu-item (click)="logout()">Log out</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

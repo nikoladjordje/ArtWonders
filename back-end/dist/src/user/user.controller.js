@@ -16,12 +16,30 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const user_dto_1 = require("./models/user.dto");
+const local_auth_guard_1 = require("../auth/local-auth.guard");
+const auth_service_1 = require("../auth/auth.service");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const platform_express_1 = require("@nestjs/platform-express");
+const config_1 = require("../../config");
 let UserController = class UserController {
-    constructor(userService) {
+    constructor(userService, authService) {
         this.userService = userService;
+        this.authService = authService;
     }
     register(userDto) {
         return this.userService.register(userDto);
+    }
+    async login(req) {
+        return this.authService.login(req.user);
+    }
+    async getUser(id) {
+        return await this.userService.findUser(id);
+    }
+    updateUser(user, profilePicture) {
+        return this.userService.updateUser(user, profilePicture);
+    }
+    deleteUser(id) {
+        return this.userService.deleteUser(id);
     }
 };
 exports.UserController = UserController;
@@ -32,8 +50,41 @@ __decorate([
     __metadata("design:paramtypes", [user_dto_1.UserDto]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "register", null);
+__decorate([
+    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUser", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Put)(),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('profilePicture', config_1.FILE_CONF)),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFile)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "deleteUser", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        auth_service_1.AuthService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map

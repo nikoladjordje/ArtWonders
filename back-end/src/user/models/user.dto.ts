@@ -1,7 +1,6 @@
 import { Role } from 'src/enums/role.enum';
 
 export class UserDto {
-  id: number;
   username: string;
   name: string;
   lastName: string;
