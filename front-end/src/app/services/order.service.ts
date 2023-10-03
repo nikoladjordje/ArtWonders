@@ -8,6 +8,12 @@ export class OrderService {
   constructor(private httpClient: HttpClient) {}
 
   addOrder(order: OrderDto) {
-    return this.httpClient.post<OrderDto>(environment.api + '/order', order);
+    console.log(order);
+
+    return this.httpClient.post<Order>(environment.api + '/order', order);
+  }
+
+  getOrdersByBuyer(id: number) {
+    return this.httpClient.get<Order[]>(environment.api + '/order/' + id);
   }
 }

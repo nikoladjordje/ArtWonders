@@ -18,6 +18,10 @@ const painting_dto_1 = require("./models/painting.dto");
 const painting_service_1 = require("./painting.service");
 const platform_express_1 = require("@nestjs/platform-express");
 const config_1 = require("../../config");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const roles_guard_1 = require("../auth/roles.guard");
+const role_enum_1 = require("../enums/role.enum");
+const roles_decorator_1 = require("../auth/roles.decorator");
 let PaintingController = class PaintingController {
     constructor(paintingService) {
         this.paintingService = paintingService;
@@ -54,6 +58,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PaintingController.prototype, "getPainting", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', config_1.FILE_CONF)),
     __param(0, (0, common_1.Body)()),
@@ -63,14 +68,18 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PaintingController.prototype, "addPainting", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.User),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], PaintingController.prototype, "deletePainting", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Put)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.User),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

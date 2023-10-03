@@ -27,6 +27,13 @@ let OrderService = class OrderService {
     getById(id) {
         return this.orderRepository.findOneBy({ id: id });
     }
+    async getByUserId(id) {
+        let orders = await this.orderRepository.find({
+            where: { buyer: { id: id } },
+            relations: ['painting'],
+        });
+        return orders;
+    }
     async create(orderDto) {
         const order = this.orderRepository.create(orderDto);
         return await this.orderRepository.save(order);

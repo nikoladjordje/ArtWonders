@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { OrderDto } from 'src/app/models/order';
-import { Painting } from 'src/app/models/painting';
+import { Painting, PaintingDto } from 'src/app/models/painting';
 import { User } from 'src/app/models/user';
 import { addOrder } from 'src/app/store/order/order.actions';
 import {
@@ -42,7 +42,13 @@ export class PaintingComponent implements OnInit {
       };
       console.log(orderData);
       this.store.dispatch(addOrder({ order: orderData }));
+      this.store.dispatch(loadPaintings());
+      this.paintings$ = this.store.select(loadPaintingList);
       // addOrder(orderData);
     }
+  }
+  hasOrderAccess(): boolean {
+    if (this.user) return true;
+    return false;
   }
 }

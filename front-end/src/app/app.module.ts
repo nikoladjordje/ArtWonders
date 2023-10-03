@@ -41,6 +41,10 @@ import { PaintingEffects } from './store/painting/painting.effects';
 import { PaintingComponent } from './components/painting/painting.component';
 import { paintingReducer } from './store/painting/painting.reducer';
 import { MyPaintingsComponent } from './components/my-paintings/my-paintings.component';
+import { OrderEffects } from './store/order/order.effects';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { orderReducer } from './store/order/order.reducer';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,8 @@ import { MyPaintingsComponent } from './components/my-paintings/my-paintings.com
     EditProfileComponent,
     PaintingComponent,
     MyPaintingsComponent,
+    MyOrdersComponent,
+    OrderItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,9 +68,10 @@ import { MyPaintingsComponent } from './components/my-paintings/my-paintings.com
     StoreModule.forRoot<AppState>({
       user: userReducer,
       painting: paintingReducer,
+      order: orderReducer
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, autoPause: true }),
-    EffectsModule.forRoot([UserEffects, PaintingEffects]),
+    EffectsModule.forRoot([UserEffects, PaintingEffects, OrderEffects]),
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

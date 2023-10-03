@@ -16,17 +16,37 @@ exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
 const order_service_1 = require("./order.service");
 const order_dto_1 = require("./models/order.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const roles_guard_1 = require("../auth/roles.guard");
+const roles_decorator_1 = require("../auth/roles.decorator");
+const role_enum_1 = require("../enums/role.enum");
+const painting_service_1 = require("../painting/painting.service");
 let OrderController = class OrderController {
-    constructor(orderService) {
+    constructor(orderService, paintingService) {
         this.orderService = orderService;
+        this.paintingService = paintingService;
     }
     getOrders() {
         return this.orderService.getAll();
     }
     getOrder(id) {
-        return this.orderService.getById(id);
+        return this.orderService.getByUserId(id);
     }
     addOrder(dto) {
+        const paintingDto = {
+            title: dto.painting.title,
+            artist: dto.painting.artist,
+            description: dto.painting.description,
+            creation_date: dto.painting.creation_date,
+            medium: dto.painting.medium,
+            style: dto.painting.style,
+            price: dto.painting.price,
+            image: dto.painting.image,
+            availability: false,
+            owner: dto.painting.owner,
+        };
+        console.log(paintingDto);
+        const a = this.paintingService.update(dto.painting.id, paintingDto);
         return this.orderService.create(dto);
     }
     deleteOrder(id) {
@@ -51,6 +71,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrderController.prototype, "getOrder", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -58,14 +79,18 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrderController.prototype, "addOrder", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.User),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], OrderController.prototype, "deleteOrder", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Put)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.User),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -74,6 +99,7 @@ __decorate([
 ], OrderController.prototype, "updateOrder", null);
 exports.OrderController = OrderController = __decorate([
     (0, common_1.Controller)('order'),
-    __metadata("design:paramtypes", [order_service_1.OrderService])
+    __metadata("design:paramtypes", [order_service_1.OrderService,
+        painting_service_1.PaintingService])
 ], OrderController);
 //# sourceMappingURL=order.controller.js.map

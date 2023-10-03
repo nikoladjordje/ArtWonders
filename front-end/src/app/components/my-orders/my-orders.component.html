@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>My Orders</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="order-list">
+      <div *ngFor="let order of order$ | async" class="order-item">
+        <div class="order-details">
+          <p><strong>Order ID:</strong> {{ order.id }}</p>
+          <p><strong>Order Date:</strong> {{ order.orderDate | date }}</p>
+          <p><strong>Painting:</strong> {{ order.painting.title }}</p>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

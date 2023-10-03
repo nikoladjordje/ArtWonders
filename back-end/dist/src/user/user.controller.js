@@ -21,6 +21,9 @@ const auth_service_1 = require("../auth/auth.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const platform_express_1 = require("@nestjs/platform-express");
 const config_1 = require("../../config");
+const roles_guard_1 = require("../auth/roles.guard");
+const roles_decorator_1 = require("../auth/roles.decorator");
+const role_enum_1 = require("../enums/role.enum");
 let UserController = class UserController {
     constructor(userService, authService) {
         this.userService = userService;
@@ -76,7 +79,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "updateUser", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.User),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

@@ -1,122 +1,113 @@
-<form [formGroup]="infoFormGroup" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input
-      type="text"
-      id="title"
-      formControlName="title"
-      class="form-control"
-    />
-  </div>
+<div class="parent-container">
+  <mat-card class="example-card mat-elevation-z10 margin-class">
+    <form [formGroup]="infoFormGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput type="text" formControlName="title" required />
+        </mat-form-field>
+      </div>
 
-  <div class="form-group">
-    <label for="artist">Artist</label>
-    <input
-      type="text"
-      id="artist"
-      formControlName="artist"
-      class="form-control"
-    />
-  </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Artist</mat-label>
+          <input matInput type="text" formControlName="artist" required />
+        </mat-form-field>
+      </div>
 
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea
-      id="description"
-      formControlName="description"
-      class="form-control"
-    ></textarea>
-  </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+        </mat-form-field>
+      </div>
 
-  <div class="form-group">
-    <label for="creation_date">Creation Date</label>
-    <input
-      type="date"
-      id="creation_date"
-      formControlName="creation_date"
-      class="form-control"
-    />
-  </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Creation Date</mat-label>
+          <input
+            matInput
+            type="date"
+            formControlName="creation_date"
+            required
+          />
+        </mat-form-field>
+      </div>
 
-  <div class="form-group">
-    <label for="medium">Medium</label>
-    <input
-      type="text"
-      id="medium"
-      formControlName="medium"
-      class="form-control"
-    />
-  </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Medium</mat-label>
+          <input matInput type="text" formControlName="medium" required />
+        </mat-form-field>
+      </div>
 
-  <div class="form-group">
-    <label for="style">Style</label>
-    <input
-      type="text"
-      id="style"
-      formControlName="style"
-      class="form-control"
-    />
-  </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Style</mat-label>
+          <input matInput type="text" formControlName="style" required />
+        </mat-form-field>
+      </div>
 
-  <div class="form-group">
-    <label for="price">Price</label>
-    <input
-      type="number"
-      id="price"
-      formControlName="price"
-      class="form-control"
-    />
-  </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price" required />
+        </mat-form-field>
+      </div>
 
-  <div
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    *ngIf="this.imagePreview"
-  >
-    <div class="drag-div" cdkDrag>
+      <div class="form-group">
+        <div
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          *ngIf="this.imagePreview"
+        >
+          <div class="drag-div" cdkDrag>
+            <button
+              mat-mini-fab
+              value="{{ this.imagePreview }}"
+              color="accent"
+              class="remove-btn"
+              (click)="removeImg(btnRemove.id)"
+            >
+              <mat-icon>x</mat-icon>
+            </button>
+            <img
+              #btnRemove
+              [id]="1"
+              [src]="this.imagePreview"
+              class="img-img"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="fileInput.click()"
+          >
+            <mat-icon>add_photo_alternate</mat-icon>
+            <span>Add Image</span>
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              multiple
+              style="display: none"
+              (change)="handleSelectedFile($event)"
+            />
+          </button>
+        </div>
+      </div>
+
       <button
-        mat-mini-fab
-        value="{{ this.imagePreview }}"
-        color="accent"
-        class="remove-btn"
-        (click)="removeImg(btnRemove.id)"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="createPainting()"
       >
-        <mat-icon>x</mat-icon>
+        Submit
       </button>
-      <img #btnRemove [id]="1" [src]="this.imagePreview" class="img-img" />
-    </div>
-  </div>
-  <div class="form-group">
-    <button
-      mat-stroked-button
-      color="primary"
-      type="button"
-      (click)="fileInput.click()"
-    >
-      <span>Add image</span>
-      <input
-        #fileInput
-        type="file"
-        accept="image/*"
-        multiple
-        required
-        (change)="handleSelectedFile($event)"
-        style="display: none"
-      />
-    </button>
-  </div>
-
-  <div class="form-group">
-    <label for="availability">Availability</label>
-    <input
-      type="checkbox"
-      id="availability"
-      formControlName="availability"
-      class="form-control"
-    />
-  </div>
-
-  <button type="submit" (click)="createPainting()" class="btn btn-primary">
-    Submit
-  </button>
-</form>
+    </form>
+  </mat-card>
+</div>

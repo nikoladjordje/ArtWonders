@@ -7,7 +7,7 @@ export declare class PaintingDto {
     medium: string;
     style: string;
     price: number;
-    image_url: string;
+    image: string;
     availability: boolean;
     owner: User;
 }

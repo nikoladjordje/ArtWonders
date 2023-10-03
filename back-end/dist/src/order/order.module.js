@@ -12,14 +12,16 @@ const order_entity_1 = require("./models/order.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const order_controller_1 = require("./order.controller");
 const order_service_1 = require("./order.service");
+const painting_service_1 = require("../painting/painting.service");
+const painting_entity_1 = require("../painting/models/painting.entity");
 let OrderModule = class OrderModule {
 };
 exports.OrderModule = OrderModule;
 exports.OrderModule = OrderModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([order_entity_1.Order])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([order_entity_1.Order, painting_entity_1.Painting])],
         controllers: [order_controller_1.OrderController],
-        providers: [order_service_1.OrderService],
+        providers: [order_service_1.OrderService, painting_service_1.PaintingService],
     })
 ], OrderModule);
 //# sourceMappingURL=order.module.js.map

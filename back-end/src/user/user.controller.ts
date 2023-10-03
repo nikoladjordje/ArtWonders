@@ -19,6 +19,9 @@ import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FILE_CONF } from 'config';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { Role } from 'src/enums/role.enum';
 
 @Controller('user')
 export class UserController {
@@ -52,8 +55,9 @@ export class UserController {
   ) {
     return this.userService.updateUser(user, profilePicture);
   }
-
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
+  @Roles(Role.User)
   public deleteUser(@Param('id', ParseIntPipe) id: number) {
     return this.userService.deleteUser(id);
   }

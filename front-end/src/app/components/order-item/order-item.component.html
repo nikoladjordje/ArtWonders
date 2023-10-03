@@ -1,0 +1,11 @@
+<div class="mat-card">
+  <mat-card-header>
+    <mat-card-title>Order Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>ID:</strong> {{ order?.id }}</p>
+    <p><strong>Order Date:</strong> {{ order?.orderDate | date }}</p>
+    <p><strong>Painting:</strong> {{ order?.painting?.title }}</p>
+    <p><strong>Buyer:</strong> {{ order?.buyer?.name }}</p>
+  </mat-card-content>
+</div>

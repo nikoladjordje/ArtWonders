@@ -25,3 +25,7 @@ export const loadUserPaintingsSuccess = createAction(
   'Load user paintings success',
   props<{ paintings: Painting[] }>()
 );
+export const updatePaiting = createAction(
+  'update painting',
+  props<{ painting: PaintingDto }>()
+);

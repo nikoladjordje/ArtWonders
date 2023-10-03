@@ -11,4 +11,5 @@ export declare class PaintingService {
     create(paintingDto: PaintingDto, img: Express.Multer.File): Promise<Painting>;
     delete(id: number): Promise<import("typeorm").DeleteResult>;
     update(id: number, dto: PaintingDto): Promise<import("typeorm").UpdateResult>;
+    updateAvailability(id: number, dto: PaintingDto): Promise<void>;
 }

@@ -8,6 +8,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { PaintingComponent } from './components/painting/painting.component';
 import { MyPaintingsComponent } from './components/my-paintings/my-paintings.component';
 import { OrderService } from './services/order.service';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'painting', component: PaintingComponent },
   { path: 'my-paintings', component: MyPaintingsComponent },
+  { path: 'my-orders', component: MyOrdersComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: HomeComponent },
 ];

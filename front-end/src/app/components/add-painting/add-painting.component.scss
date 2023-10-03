@@ -5,6 +5,15 @@
   margin: 10px;
 }
 
+.example-card {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
 .nextButton {
   display: flex;
   flex-direction: row;
@@ -86,4 +95,11 @@
   width: 150px;
   height: auto;
   cursor: pointer;
+}
+.parent-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
 }

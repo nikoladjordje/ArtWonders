@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -23,13 +23,30 @@ export class AddPaintingComponent implements OnInit {
     title: ['', Validators.required],
     artist: ['', Validators.required],
     description: ['', Validators.required],
-    creation_date: ['', Validators.required],
+    creation_date: [
+      '',
+      Validators.required,
+      this.dateShouldNotBeInFuture.bind(this),
+    ],
     medium: ['', Validators.required],
     style: ['', Validators.required],
     price: [0, [Validators.required, Validators.min(0)]],
     image: ['', Validators.required],
     availability: [false],
   });
+
+  dateShouldNotBeInFuture(
+    control: AbstractControl
+  ): { [key: string]: boolean } | null {
+    const selectedDate = new Date(control.value);
+    const currentDate = new Date();
+
+    if (selectedDate > currentDate) {
+      return { futureDate: true };
+    }
+
+    return null; // Validation passed
+  }
 
   imagePreview: string | null = null;
   selectedImage: File | null = null;

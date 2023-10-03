@@ -43,7 +43,7 @@
                     required
                   />
                 </mat-form-field>
-                <button type="submit">Order</button>
+                <button [disabled]="!hasOrderAccess()" type="submit">Order</button>
               </form>
             </div>
           </div>

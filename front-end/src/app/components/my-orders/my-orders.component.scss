@@ -1,0 +1,54 @@
+mat-card {
+  max-width: 400px;
+  margin: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+mat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-item {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-details {
+  font-size: 16px;
+}
+
+.order-details strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.mat-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mat-button:hover {
+  background-color: #0056b3;
+}

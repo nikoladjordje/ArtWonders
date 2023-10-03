@@ -36,8 +36,9 @@ export class PaintingService {
       }
 
       painting.image = img.filename;
+      painting.availability = true;
     }
-    console.log('painting service:' + painting.availability);
+    // console.log('painting service:' + painting.availability);
 
     return await this.paintingRepository.save(painting);
   }
@@ -46,5 +47,10 @@ export class PaintingService {
   }
   public async update(id: number, dto: PaintingDto) {
     return await this.paintingRepository.update(id, dto);
+  }
+  public async updateAvailability(id: number, dto: PaintingDto) {
+    console.log(dto.availability);
+    dto.availability = false;
+    await this.paintingRepository.update(id, dto);
   }
 }

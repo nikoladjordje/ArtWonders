@@ -44,8 +44,8 @@ let PaintingService = class PaintingService {
                 fs.unlinkSync(`${config_1.UPLOAD_DESTINATION}/${image}`);
             }
             painting.image = img.filename;
+            painting.availability = true;
         }
-        console.log('painting service:' + painting.availability);
         return await this.paintingRepository.save(painting);
     }
     async delete(id) {
@@ -53,6 +53,11 @@ let PaintingService = class PaintingService {
     }
     async update(id, dto) {
         return await this.paintingRepository.update(id, dto);
+    }
+    async updateAvailability(id, dto) {
+        console.log(dto.availability);
+        dto.availability = false;
+        await this.paintingRepository.update(id, dto);
     }
 };
 exports.PaintingService = PaintingService;
